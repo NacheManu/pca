@@ -1,0 +1,7 @@
+{
+  "name": "PCA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
