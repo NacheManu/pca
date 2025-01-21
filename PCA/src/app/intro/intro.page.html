@@ -1,0 +1,28 @@
+<ion-content>
+  <swiper-container
+    slides-per-view="1"
+    pagination="true"
+  >
+    <swiper-slide class="bg-color-slide">
+      <h1 class="title1">¡Bienvenido a UniPCA!</h1>
+      <img src="https://pca.edu.co/e+e/images/logo-retina.png" alt="Bienvenida a UniPCA">
+      <ion-icon name="school-outline"></ion-icon>
+      <p>Conecta con tus compañeros, comparte momentos y encuentra todo lo que necesitas para tu vida universitaria.</p>
+    </swiper-slide>
+
+    <swiper-slide>
+      <h1>Descubre y Conecta</h1>
+      <img src="https://cdn0.iconfinder.com/data/icons/people-lifestyle/100/People-02-2-512.png" alt="Conecta con amigos">
+      <ion-icon name="people-outline"></ion-icon>
+      <p>Crea publicaciones, únete a grupos de interés y encuentra eventos en tu campus con UniPCA.</p>
+    </swiper-slide>
+
+    <swiper-slide>
+      <ion-icon name="close" class="close-icon" (click)="finish()"></ion-icon>
+      <h1>¡Empieza ahora!</h1>
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+      <p>Explora UniPCA y sé parte de la comunidad estudiantil más activa.</p>
+      <ion-button (click)="finish()">Ir al inicio</ion-button>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

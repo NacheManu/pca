@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <figure class="text-center">
+    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+  </figure>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <ion-item class="input-item">
+      <ion-input
+        label="Correo Electrónico"
+        labelPlacement="floating"
+        placeholder="example@pca.edu.co"
+        formControlName="email">
+      </ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let error of formErrors.email">
+        <ion-label class="error-text" *ngIf="(loginForm.get('email')?.hasError(error.type) && loginForm.get('email')?.dirty)">
+          {{ error.message }}
+        </ion-label>
+      </ng-container>
+    </div>
+
+    <ion-item class="input-item">
+      <ion-input
+        label="Contraseña"
+        labelPlacement="floating"
+        type="password"
+        placeholder="********"
+        formControlName="password">
+      </ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let error of formErrors.password">
+        <ion-label class="error-text" *ngIf="(loginForm.get('password')?.hasError(error.type) && loginForm.get('password')?.dirty)">
+          {{ error.message }}
+        </ion-label>
+      </ng-container>
+    </div>
+
+    <ion-button
+      type="submit"
+      [disabled]="!loginForm.valid"
+      expand="block"
+      color="danger">
+      Iniciar Sesión
+    </ion-button>
+  </form>
+
+  <div class="text-center">
+    <p>¿No tienes una cuenta? 
+      <ion-button fill="clear" color="danger" (click)="goToRegister()">Regístrate aquí</ion-button>
+    </p>
+  </div>
+
+  <p class="error-text">{{errorMessage}}</p>
+</ion-content>

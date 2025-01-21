@@ -1,0 +1,30 @@
+.register-content {
+    --background: #ffffff;
+    padding: 16px;
+  }
+  
+  .input-item {
+    margin-bottom: 16px;
+  }
+  
+  .error-text {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin: 4px 0 16px 8px;
+  }
+  
+  ion-toolbar {
+    --background: #b71c1c;
+    --color: #ffffff;
+  }
+  
+  ion-button {
+    --background: #b71c1c;
+    --color: #ffffff;
+  }
+  
+  ion-button:disabled {
+    --background: #e0e0e0;
+    --color: #9e9e9e;
+  }
+  
