@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title class="ion-text-center">Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,6 +8,7 @@
   <figure class="text-center">
     <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
   </figure>
+
   <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
     <ion-item class="input-item">
       <ion-input
@@ -19,7 +20,8 @@
     </ion-item>
     <div>
       <ng-container *ngFor="let error of formErrors.email">
-        <ion-label class="error-text" *ngIf="(loginForm.get('email')?.hasError(error.type) && loginForm.get('email')?.dirty)">
+        <ion-label class="error-text" 
+          *ngIf="(loginForm.get('email')?.hasError(error.type) && loginForm.get('email')?.dirty)">
           {{ error.message }}
         </ion-label>
       </ng-container>
@@ -36,7 +38,8 @@
     </ion-item>
     <div>
       <ng-container *ngFor="let error of formErrors.password">
-        <ion-label class="error-text" *ngIf="(loginForm.get('password')?.hasError(error.type) && loginForm.get('password')?.dirty)">
+        <ion-label class="error-text" 
+          *ngIf="(loginForm.get('password')?.hasError(error.type) && loginForm.get('password')?.dirty)">
           {{ error.message }}
         </ion-label>
       </ng-container>
@@ -51,6 +54,8 @@
     </ion-button>
   </form>
 
+  <p class="error-text ion-text-center">{{ errorMessage }}</p>
+
   <div class="text-center">
     <p>¿No tienes una cuenta? 
       <ion-button fill="clear" color="danger" (click)="goToRegister()">Regístrate aquí</ion-button>
@@ -58,4 +63,5 @@
   </div>
 
   <p class="error-text">{{errorMessage}}</p>
+
 </ion-content>
