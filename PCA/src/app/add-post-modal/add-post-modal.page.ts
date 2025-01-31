@@ -31,7 +31,7 @@ export class AddPostModalPage implements OnInit {
   ngOnInit() {
   }
 
-  async uploadPhone(){
+  async uploadPhoto(){
     console.log('Upload Photo');
     const uploadPhoto = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
@@ -59,12 +59,19 @@ export class AddPostModalPage implements OnInit {
     this.postService.createPost(post_param).then(
       (data: any) => {
         console.log(data, 'post creado');
-        this.modalController.dismiss({null: null});
+        data.user = {
+          id: user.id,
+          name: user.name,
+          image: user.image || 'assets/images/default-avatar.jpeg'
+        };
+        this.postService.postCreated.emit(data);
+        this.addPostForm.reset();
+        this.post_image = null;
+        this.modalController.dismiss();
       },
       (error) => {
         console.log(error, 'error');
       }
     );
   }
-
 }

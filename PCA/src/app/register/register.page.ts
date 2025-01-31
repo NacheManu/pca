@@ -23,6 +23,10 @@ export class RegisterPage implements OnInit {
       { type: 'required', message: 'El apellido es obligatorio' },
       { type: 'minlength', message: 'El apellido debe tener al menos 2 caracteres' }
     ],
+    username: [
+      { type: 'required', message: 'El nombre de usuario es obligatorio' },
+      { type: 'minlength', message: 'El nombre de usuario debe tener al menos 3 caracteres' }
+    ],
     email: [
       { type: 'required', message: 'El correo es obligatorio' },
       { type: 'email', message: 'El correo no es válido' }
@@ -47,9 +51,13 @@ export class RegisterPage implements OnInit {
         Validators.required,
         Validators.minLength(2)
       ])),
-      lastname: new FormControl('', Validators.compose([
+      last_name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2)
+      ])),
+      username: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
       ])),
       email: new FormControl('', Validators.compose([
         Validators.required,

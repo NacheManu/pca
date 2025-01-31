@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" color="light"></ion-back-button>
+    </ion-buttons>
     <ion-title class="ion-text-center">Registro</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,11 +30,25 @@
           label="Apellido" 
           labelPlacement="floating" 
           placeholder="Pérez" 
-          formControlName="lastname"></ion-input>
+          formControlName="last_name"></ion-input>
       </ion-item>
       <ng-container *ngFor="let error of formErrors.lastname">
         <ion-label color="danger" 
-          *ngIf="(registerForm.get('lastname')?.hasError(error.type) && registerForm.get('lastname')?.dirty)">
+          *ngIf="(registerForm.get('last_name')?.hasError(error.type) && registerForm.get('last_name')?.dirty)">
+          {{ error.message }}
+        </ion-label>
+      </ng-container>
+
+      <ion-item>
+        <ion-input 
+          label="Nombre de usuario" 
+          labelPlacement="floating" 
+          placeholder="juanperez" 
+          formControlName="username"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let error of formErrors.username">
+        <ion-label color="danger" 
+          *ngIf="(registerForm.get('username')?.hasError(error.type) && registerForm.get('username')?.dirty)">
           {{ error.message }}
         </ion-label>
       </ng-container>

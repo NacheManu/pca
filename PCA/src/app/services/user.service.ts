@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
   urlServer = 'http://51.79.26.171';
-  //urlServer = 'http://localhost:3000';
   httpHeaders = { headers: new HttpHeaders({"Content-Type": "application/json"})};
 
   constructor(
@@ -21,7 +20,7 @@ export class UserService {
         (error) => {
           console.log(error, 'error');
            if (error.status == 500){
-            reject('Error Porfavor intenta mas tarde');
+            reject('Error, porfavor intenta mas tarde.');
           }else{
             reject('Error al obtener el usuario');
           }
@@ -42,9 +41,56 @@ export class UserService {
         (error) => {
           console.log(error, 'error');
            if (error.status == 500){
-            reject('Error Porfavor intenta mas tarde');
+            reject('Error, porfavor intenta mas tarde.');
           }else{
-            reject('Error al actualizar el usuario');
+            reject('Error al actualizar el usuario.');
+          }
+        }
+      )
+    });
+  }
+
+  listUsers(page: number, perPage: number, query: string = ''){
+    const url = `${this.urlServer}/list_users?page=${page}&per_page=${perPage}&query=${query}`;
+    return this.http.get(url).toPromise();
+  }
+
+  followUser(user_id: any, followee_id: any){
+    const follow_params = {
+      followee_id: followee_id
+    }
+    return new Promise((accept, reject) => {
+      this.http.post(`${this.urlServer}/follow/${user_id}`, follow_params, this.httpHeaders).subscribe(
+        (data: any)=>{
+            accept(data);
+        },
+        (error) => {
+          console.log(error, 'error');
+           if (error.status == 500){
+            reject('Error, porfavor intenta mas tarde.');
+          }else{
+            reject('Error al seguir al usuario.');
+          }
+        }
+      )
+    });
+  }
+
+  unfollowUser(user_id: any, followee_id: any){
+    const follow_params = {
+      followee_id: followee_id
+    }
+    return new Promise((accept, reject) => {
+      this.http.post(`${this.urlServer}/unfollow/${user_id}`, follow_params, this.httpHeaders).subscribe(
+        (data: any)=>{
+            accept(data);
+        },
+        (error) => {
+          console.log(error, 'error');
+           if (error.status == 500){
+            reject('Error, porfavor intenta mas tarde.');
+          }else{
+            reject('Error al seguir al usuario.');
           }
         }
       )
