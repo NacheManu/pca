@@ -20,6 +20,6 @@ export class IntroPage implements OnInit {
   finish(){
     console.log('Finish');
     this.storage.set('viLaIntro', true);
-    this.router.navigateByUrl('/menu/home'); 
+    this.router.navigateByUrl('/login'); 
   }
 }

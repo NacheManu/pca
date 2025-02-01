@@ -4,14 +4,16 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { Storage } from '@ionic/storage-angular';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 defineCustomElements(window);
+
 @Component({
   selector: 'app-add-post-modal',
   templateUrl: './add-post-modal.page.html',
   styleUrls: ['./add-post-modal.page.scss'],
   standalone: false,
 })
+
 export class AddPostModalPage implements OnInit {
   post_image: any;
   addPostForm: FormGroup;
@@ -20,7 +22,8 @@ export class AddPostModalPage implements OnInit {
     private formBuilder: FormBuilder,
     private postService: PostService,
     private storage: Storage,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertController: AlertController
   ) { 
     this.addPostForm = this.formBuilder.group({
       description: new FormControl('', Validators.required),
@@ -28,20 +31,49 @@ export class AddPostModalPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  async uploadPhoto(){
-    console.log('Upload Photo');
+  async takePhoto(source: CameraSource) {
     const uploadPhoto = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
-      source: CameraSource.Photos,
+      source: source,
       quality: 100
     });
+
     this.post_image = uploadPhoto.dataUrl;
     this.addPostForm.patchValue({
       image: this.post_image
     });
+  }
+
+  async uploadPhoto() {
+    const alert = await this.alertController.create({
+      header: 'Seleccione una opción',
+      message: '¿De dónde desea obtener la imagen?',
+      buttons: [
+        {
+          text: 'Galería',
+          handler: () => {
+            this.takePhoto(CameraSource.Photos);
+          }
+        },
+        {
+          text: 'Cámara',
+          handler: () => {
+            this.takePhoto(CameraSource.Camera);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Selección cancelada');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async addPost(post_data: any){
